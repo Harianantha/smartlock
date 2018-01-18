@@ -1,9 +1,9 @@
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
 
-const char* ssid = "Hariharan";
-const char* password = "ha22232750";
-const char* mqtt_server = "broker.hivemq.com";
+const char* ssid = "techops";
+const char* password = "wearethebest";
+const char* mqtt_server = "iot.eclipse.org";
 const char* TOPIC_NAME = "/techo/smartoffice/smartlock";
 const char* AUTHENTICATE_SUCCESS = "{\"Authenticate\":\"True\"}";
 
@@ -27,7 +27,8 @@ void setup() {
 }
 
 void loop() {
-  digitalWrite(LOCKPIN, HIGH);  
+  //digitalWrite(LOCKPIN, HIGH);  
+  digitalWrite(LOCKPIN, LOW);  
   // put your main code here, to run repeatedly:
  // Serial.println("In Loop");
   //digitalWrite(13, HIGH);   // turn the LED on (HIGH is the voltage level)
@@ -102,13 +103,13 @@ void callback(char* topic, byte* payload, unsigned int length) {
 
    Serial.println(messageReceived);
   if(messageReceived ==AUTHENTICATE_SUCCESS){
-    Serial.println("TURNING THE LED ON");
-    //digitalWrite(BUILTIN_LED, LOW);   // Turn the LED on (Note that LOW is the voltage level
-    digitalWrite(LOCKPIN, LOW);   // Turn the LED on (Note that LOW is the voltage level
-    delay(30000);
     Serial.println("TURNING THE LED OFF");
+    //digitalWrite(BUILTIN_LED, LOW);   // Turn the LED on (Note that LOW is the voltage level
+    digitalWrite(LOCKPIN, HIGH);   // Turn the LED on (Note that LOW is the voltage level
+    delay(10000);
+    Serial.println("TURNING THE LED ON");
     //digitalWrite(BUILTIN_LED, HIGH);  
-    digitalWrite(LOCKPIN, HIGH);  
+    digitalWrite(LOCKPIN, LOW);  
     
   }
   // Switch on the LED if an 1 was received as first character
